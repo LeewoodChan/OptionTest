@@ -79,6 +79,9 @@ namespace OptionTest
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Call the Pause Function and then keep loop
+        /// </summary>
         public static void PauseLoop()
         {
             while (true)
@@ -86,19 +89,31 @@ namespace OptionTest
                 Pause();
             }
         }
+        
+        /// <summary>
+        /// Call the Pause Function with Print Error Message and then keep loop
+        /// </summary>
+        /// <param name="message"></param>
         public static void PauseLoop(string message)
         {
             while (true)
             {
+                PrintError(message);
                 Pause();
             }
         }
+
+        /// <summary>
+        /// Call the Pause Function with Print Error Exception and then keep loop
+        /// </summary>
+        /// <param name="exception"></param>
         public static void PauseLoop(Exception exception)
         {
             while (true)
             {
                 WriteLog(exception.Message.ToString());
                 WriteLog(exception.StackTrace.ToString());
+                PrintError(exception);
                 Pause();
             }
         }
@@ -144,6 +159,20 @@ namespace OptionTest
             
 
 
+        public static void PrintError(Exception exception)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+            //Console.WriteLine(message);
+            WriteLog();
+            WriteLog(exception.Message.ToString());
+            WriteLog(exception.StackTrace.ToString());
+            WriteLog();
+            WriteLog("Please Contact Engineer Team");
+            PrintError(exception);
+        }
+
         public static void PrintError(string message)
         {
             Console.BackgroundColor = ConsoleColor.Red;
@@ -154,7 +183,7 @@ namespace OptionTest
             WriteLog(message);
             WriteLog();
             WriteLog("Please Contact Engineer Team");
-            PauseLoop(message);
+            PrintError(message);
         }
 
         public static void PrintError(string format, params object[] arg)
