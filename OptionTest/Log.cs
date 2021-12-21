@@ -10,8 +10,17 @@ namespace OptionTest
 {
     class Log : Result
     {
+        /// <summary>
+        /// Get the LogPath for update status of tool process
+        /// </summary>
         private static string _LogPath = GetProcessLogPath();
 
+        /// <summary>
+        /// Options for Pause need use in the function
+        /// NoPause - Function will not Pause
+        /// One Pause - Function will pause once if the user press any to continues then process continues
+        /// Loop Pause - Function will be keep for loop and no what how much press any to continues.
+        /// </summary>
         public enum PauseOption : int
         {
             NoPause,
@@ -19,6 +28,9 @@ namespace OptionTest
             LoopPause
         }
 
+        /// <summary>
+        /// get the LogPath and setting the value of LogPath
+        /// </summary>
         public static string LogPath { get { return _LogPath; } set { _LogPath = value; } }
 
         public Log()
@@ -26,12 +38,23 @@ namespace OptionTest
             _LogPath = @"\Working\Seqloga.txt";
         }
 
+        /// <summary>
+        /// Create a object class for the Log with the input of location of Log path
+        /// </summary>
+        /// <param name="logPath">Log path where is the file of log of process tool keep track is</param>
         public Log(string logPath)
         {
             _LogPath = logPath;
 
         }
 
+        /// <summary>
+        /// This function will run the Pause base on the input of options
+        /// NoPause - Function will not Pause
+        /// One Pause - Function will pause once if the user press any to continues then process continues
+        /// Loop Pause - Function will be keep for loop and no what how much press any to continues.
+        /// </summary>
+        /// <param name="option">PauseOption which use as choice of switch function</param>
         private static void RunPauseOption(PauseOption option)
         {
             switch (option)
@@ -47,6 +70,9 @@ namespace OptionTest
             };
         }
 
+        /// <summary>
+        /// Print the Press any Key to continuesl, then use ReadKey to Pause the script from continues running
+        /// </summary>
         public static void Pause()
         {
             Console.WriteLine("Press any Key to continues");
@@ -146,7 +172,8 @@ namespace OptionTest
             }
             catch (Exception ex)
             {
-                PauseExit(ex, 2);
+                Exit(ex, 2);
+                //PauseExit(ex, 2);
             }
         }
         public static void PrintError(string format, object arg0)
@@ -159,7 +186,8 @@ namespace OptionTest
             }
             catch (Exception ex)
             {
-                PauseExit(ex, 2);
+                //PauseExit(ex, 2);
+                Exit(ex, 2);
             }
         }
 
@@ -174,7 +202,8 @@ namespace OptionTest
             }
             catch (Exception ex)
             {
-                PauseExit(ex, 1);
+                //PauseExit(ex, 1);
+                Exit(ex, 1);
             }
         }
         public static void WriteLog(string input)
@@ -188,7 +217,8 @@ namespace OptionTest
             }
             catch (Exception ex)
             {
-                PauseExit(ex, 1);
+                Exit(ex, 1);
+                //PauseExit(ex, 1);
             }
         }
         public static void WriteLog(string format, params object[] arg)
@@ -206,7 +236,8 @@ namespace OptionTest
             }
             catch (Exception ex)
             {
-                PauseExit(ex, 1);
+                //PauseExit(ex, 1);
+                Exit(ex, 1);
             }
         }
         public static void WriteLog(string format, object arg0)
@@ -219,7 +250,8 @@ namespace OptionTest
             }
             catch (Exception ex)
             {
-                PauseExit(ex, 1);
+                //PauseExit(ex, 1);
+                Exit(ex, 1);
             }
         }
 
